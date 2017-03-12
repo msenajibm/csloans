@@ -5,7 +5,7 @@
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var expect = chai.expect;
-var calculator = require('../services/calculator');
+var calculator = require('./coverage/instrumented/services/calculator');
 
 chai.use(chaiHttp);
 

@@ -28,7 +28,11 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
-app.use(logger('dev'));
+
+// turn logger off for tests
+if( process.env.NODE_ENV !== 'test'){
+    app.use(logger('dev'));
+}
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -386,5 +390,7 @@ module.exports = app;
 
 
 http.createServer(app).listen(app.get('port'), '0.0.0.0', function() {
-    console.log('Express server listening on port ' + app.get('port'));
+    if( process.env.NODE_ENV !== 'test'){
+        console.log('Express server listening on port ' + app.get('port'));
+    }
 });

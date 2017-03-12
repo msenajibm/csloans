@@ -1,7 +1,7 @@
 /**
  * Created by user on 12.03.2017.
  */
-var users = require('../models/users');
+var users = require('./coverage/instrumented/models/users');
 
 //Require the dev-dependencies
 var chai = require('chai');

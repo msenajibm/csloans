@@ -1,6 +1,11 @@
 module.exports = function (grunt) {
 
     grunt.initConfig({
+        env: {
+            test:{
+                NODE_ENV: 'test'
+            }
+        },
         pkg: grunt.file.readJSON('package.json'),
 
         mochaTest: {
@@ -12,7 +17,7 @@ module.exports = function (grunt) {
                     quite: true,
                     captureFile: 'mochatest.json'
                 },
-                src: ['tests/server/*.js']
+                src: ['tests/*.js']
             },
             'server-side-spec': {
                 options: {
@@ -72,14 +77,14 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         dest: 'tests/coverage/instrumented',
-                        src: ['routes/*.js', 'dataprovider/*.js']
+                        src: ['routes/*.js', 'models/*.js', 'services/*.js']
                     }
                 ]
             }
         },
 
         instrument: {
-            files: ['routes/*.js', 'dataprovider/*.js'],
+            files: ['routes/*.js', 'models/*.js', 'services/*.js'],
             options: {
                 lazy: false,
                 basePath: 'tests/coverage/instrumented/'
@@ -176,6 +181,7 @@ module.exports = function (grunt) {
 
     });
 
+    grunt.loadNpmTasks('grunt-env');
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-available-tasks');
     grunt.loadNpmTasks('grunt-mocha-test');
@@ -186,10 +192,10 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', ['availabletasks']);
     grunt.registerTask('dev-lint', ['jshint:browser', 'jshint:server']);
-    grunt.registerTask('dev-setup', ['clean:all', 'sass:dist', 'jshint:browser']);
+    grunt.registerTask('dev-setup', []);
     grunt.registerTask('fvt-test', ['mochaTest:fvt']);
-    grunt.registerTask('dev-test', ['clean:coverage', 'copy:resourcesForInstrumented', 'instrument', 'mochaTest:server-side-spec']);
-    grunt.registerTask('dev-test-cov', ['clean:coverage', 'copy:resourcesForInstrumented', 'instrument', 'mochaTest:server-side', 'storeCoverage', 'makeReport']);
+    grunt.registerTask('dev-test', ['env','clean:coverage', 'copy:resourcesForInstrumented', 'instrument', 'mochaTest:server-side-spec']);
+    grunt.registerTask('dev-test-cov', ['env','clean:coverage', 'copy:resourcesForInstrumented', 'instrument', 'mochaTest:server-side', 'storeCoverage', 'makeReport']);
     grunt.registerTask('dev-uitest', ['mochaTest:fvt']);
 
 };
