@@ -3,7 +3,8 @@
   "version": "0.0.2",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "mocha"
   },
   "dependencies": {
     "body-parser": "1.14.x",
@@ -16,6 +17,12 @@
     "mongoose": "^4.1.6",
     "morgan": "1.6.x",
     "bluemix-autoscaling-agent": "*"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^2.4.5"
   },
   "repository": {},
   "engines": {
