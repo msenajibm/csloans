@@ -28,28 +28,3 @@ describe('Calculators', function () {
     });
 
 });
-
-//Our parent block
-// describe('Users', function () {
-//     beforeEach(function (done) { //Before each test we empty the database
-//         Book.remove({}, function (err) {
-//             done();
-//         });
-//     });
-//     /*
-//      * Test the /GET route
-//      */
-//     describe('/GET users', function () {
-//         it('it should GET all users', function (done) {
-//             chai.request(server)
-//                 .get('/book')
-//                 .end(function (err, res) {
-//                     res.should.have.status(200);
-//                     res.body.should.be.a('array');
-//                     res.body.length.should.be.eql(0);
-//                     done();
-//                 });
-//         });
-//     });
-//
-// });

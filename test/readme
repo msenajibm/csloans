@@ -1,0 +1,3 @@
+# to run coverage use
+# by default it will produce /coverage folder with report
+istanbul cover node_modules/mocha/bin/_mocha
