@@ -9,7 +9,7 @@ var express = require('express'),
     http = require('http'),
     path = require('path'),
     fs = require('fs'),
-    db = require('./models/dbConnection');
+    db = require('./models/dbConnection')('my_sample_db_test');
 
 var app = express();
 
@@ -36,6 +36,7 @@ if( process.env.NODE_ENV !== 'test'){
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(allowCrossDomain);
 app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -49,6 +50,15 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/calculate/annuity', calculations.anuity);
+app.get('/calculate/perform', calculations.perform);
+
+function allowCrossDomain(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+    next();
+}
 
 function createResponseData(id, name, value, attachments) {
 

@@ -1,4 +1,4 @@
-var db = require('./dbConnection');
+var db = require('./dbConnection')('users');
 
 function getAll(){
     return new Promise( function( resolve, reject ){

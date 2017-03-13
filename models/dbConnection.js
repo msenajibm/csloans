@@ -43,19 +43,26 @@ function initDBConnection() {
     }
 
     cloudant = require('cloudant')(dbCredentials.url);
+}
 
+function use( dbName ){
+    if( !dbName ){
+        dbName = dbCredentials.dbName;
+    }
     // check if DB exists if not create
-    cloudant.db.create(dbCredentials.dbName, function(err, res) {
+    cloudant.db.create(dbName, function(err, res) {
         if (err) {
             if( process.env.NODE_ENV !== 'test'){
-                console.log('Could not create new db: ' + dbCredentials.dbName + ', it might already exist.');
+                console.log('Could not create new db: ' + dbName + ', it might already exist.');
             }
         }
     });
 
-    db = cloudant.use(dbCredentials.dbName);
+    db = cloudant.use(dbName);
+
+    return db;
 }
 
 initDBConnection();
 
-module.exports = db;
+module.exports = use;

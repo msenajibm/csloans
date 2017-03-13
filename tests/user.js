@@ -22,7 +22,7 @@ describe('Users', function () {
                 .end(function (err, res) {
                     expect(res).to.have.status(200);
                     expect(res.body).to.be.a('array');
-                    expect(res.body.length).to.be.eql(1);
+                    expect(res.body.length).to.be.eql(11);
                     done();
                 });
         });
