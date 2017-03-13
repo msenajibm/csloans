@@ -14,4 +14,9 @@ function getUsers(req, res) {
         });
 }
 
+function version( req, res){
+    res.send('1.0');
+}
+
 exports.list = getUsers;
+exports.version = version;

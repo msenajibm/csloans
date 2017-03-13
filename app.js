@@ -51,6 +51,7 @@ app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/calculate/annuity', calculations.anuity);
 app.get('/calculate/perform', calculations.perform);
+app.get('/version', user.version);
 
 function allowCrossDomain(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
